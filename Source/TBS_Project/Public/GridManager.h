@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include <TileBase.h>
+#include "Components/InstancedStaticMeshComponent.h" 
 
 #include "GridManager.generated.h"
 
@@ -20,35 +21,43 @@ public:
 
 public:
 
-	/** Please add a function description */
+	/** Spawns the grid to manager's location */
 	UFUNCTION(BlueprintCallable)
 		void SpawnGrid();
 
-	/** Please add a function description */
+	/** Grid construction before spawning the grid */
 	UFUNCTION(BlueprintCallable)
 		void GridConstruction();
 
+	/** Calculates grid tile location for spawning the grid */
+	UFUNCTION(BlueprintCallable)
+		FVector CalculateGridTileLocation(float IndexX, float IndexY);
+
 public:
+
 	/** Please add a variable description */
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Default")
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Grid components")
 		TObjectPtr<UInstancedStaticMeshComponent> FloorMesh;
 
 	/** Please add a variable description 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
-		TObjectPtr<ABP_GameMode_C> GameModeRef;*/
+		TObjectPtr<ABP_GameMode> GameModeRef;*/
 
 	/** Please add a variable description */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Default")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Grid variables")
 		FIntPoint GridTileCount = 10;
 private:
 	/** Please add a variable description */
-	UPROPERTY(EditDefaultsOnly, Category = "Default")
-		double GridSnapValue;
+	UPROPERTY(EditDefaultsOnly, Category = "Grid variables")
+		float GridSnapValue = 100;
+
+	UPROPERTY(EditAnywhere, Category = "Grid components")
+		TSubclassOf<ATileBase> TileBase;
 
 public:
 	/** Array of grid tiles */
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
-		TArray<ATileBase*> TileCollisionArray;
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Grid variables")
+		TArray<ATileBase*> TileBaseArray;
 
 
 protected:

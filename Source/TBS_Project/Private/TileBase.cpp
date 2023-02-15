@@ -48,6 +48,14 @@ void ATileBase::SetConnections(ATileBase* tileBase)
 	Connection = tileBase;
 }
 
+void ATileBase::SetNeighbors()
+{
+	for (auto& tile : Dirs)
+	{
+		//Neighbors.Add(tile);
+	}
+}
+
 /* Called when the game starts or when spawned*/
 void ATileBase::BeginPlay()
 {

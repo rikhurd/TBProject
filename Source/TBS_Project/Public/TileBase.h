@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Math/IntPoint.h"
 
 #include "TileBase.generated.h"
 
@@ -70,6 +71,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
 		void SetConnections(ATileBase* tileBase);
 
+	/** Set neighbor tiles */
+	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
+		void SetNeighbors();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -78,4 +83,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
+
+	//UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Tile location variables")
+		const TArray<FIntPoint> Dirs = {
+		FIntPoint(0, 1), FIntPoint(-1, 0), FIntPoint(0, -1), FIntPoint(1, 0),
+		FIntPoint(1, 1), FIntPoint(1, -1), FIntPoint(-1, -1), FIntPoint(-1, 1) };
+
+protected:
+
+	/** Array of grid tiles */
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Tile location variables")
+		TArray<ATileBase*> Neighbors;
 };
