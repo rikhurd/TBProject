@@ -2,7 +2,7 @@
 
 
 #include "TileBase.h"
-#include "GameFramework/Controller.h"
+#include "GridManager.h"
 
 // Sets default values
 ATileBase::ATileBase()
@@ -48,11 +48,15 @@ void ATileBase::SetConnections(ATileBase* tileBase)
 	Connection = tileBase;
 }
 
-void ATileBase::SetNeighbors()
+//Set tiles neighbors. Get TileBaseArray from the GridManager that calls it
+void ATileBase::SetNeighbors(AGridManager* GridManager)
 {
-	for (auto& tile : Dirs)
+	for (auto& dir : Dirs)
 	{
-		//Neighbors.Add(tile);
+		if (ATileBase* tileToAdd = GridManager->GetTileAtPosition(dir + Index))
+		{
+			Neighbors.Add(tileToAdd);
+		}
 	}
 }
 

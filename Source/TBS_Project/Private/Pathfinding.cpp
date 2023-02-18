@@ -2,6 +2,7 @@
 
 
 #include "Pathfinding.h"
+#include "TileBase.h"
 
 // Sets default values
 APathfinding::APathfinding()
@@ -44,9 +45,12 @@ void APathfinding::FindPath(ATileBase* startNode, ATileBase* targetNode)
 
 			processed.Add(current);
 			toSearch.Remove(current);
+		}
 
-			// Process walkable and non-processed tiles here
-			//for (auto& neighbor in current.Neighbors)
+		//Process walkable and non-processed tiles here
+		for (auto* neighbor : current->Neighbors)
+		{
+
 		}
 	}
 }

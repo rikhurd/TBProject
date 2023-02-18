@@ -7,9 +7,10 @@
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Math/IntPoint.h"
-
 #include "TileBase.generated.h"
 
+//Forward declaration
+class AGridManager;
 
 UCLASS(Blueprintable)
 class TBS_PROJECT_API ATileBase : public AActor
@@ -21,8 +22,8 @@ public:
 	ATileBase();
 
 	/** TileBase Index */
-	UPROPERTY(BlueprintReadOnly, Category = "Pathfinding Variables")
-		int Index;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Pathfinding Variables")
+		FIntPoint Index;
 
 	/** Distance from the tile to the start tile */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Pathfinding Variables")
@@ -36,6 +37,10 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Pathfinding Variables")
 		double F = G + H;
 
+	/** Array of neighboring grid tiles */
+	UPROPERTY(BlueprintReadOnly, Category = "Tile location variables")
+		TArray<ATileBase*> Neighbors;
+
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
 		TObjectPtr<UBoxComponent> BoxCollision;
@@ -45,7 +50,7 @@ public:
 		TObjectPtr<USceneComponent> SceneComponent;
 
 	/** Please add a variable description */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
 		ATileBase* Connection;
 
 	/* Currently done in child Blueprint
@@ -73,7 +78,7 @@ public:
 
 	/** Set neighbor tiles */
 	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
-		void SetNeighbors();
+		void SetNeighbors(AGridManager* GridManager);
 
 protected:
 	// Called when the game starts or when spawned
@@ -85,14 +90,8 @@ public:
 
 private:
 
-	//UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Tile location variables")
+	/** Array of neighboring tile directions */
 		const TArray<FIntPoint> Dirs = {
 		FIntPoint(0, 1), FIntPoint(-1, 0), FIntPoint(0, -1), FIntPoint(1, 0),
 		FIntPoint(1, 1), FIntPoint(1, -1), FIntPoint(-1, -1), FIntPoint(-1, 1) };
-
-protected:
-
-	/** Array of grid tiles */
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Tile location variables")
-		TArray<ATileBase*> Neighbors;
 };

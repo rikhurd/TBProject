@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include <TileBase.h>
 #include "Pathfinding.generated.h"
 
+//Forward declaration
+class ATileBase;
 
 UCLASS()
 class TBS_PROJECT_API APathfinding : public AActor

@@ -2,6 +2,7 @@
 
 
 #include "GridManager.h"
+#include "TileBase.h"
 
 // Sets default values
 AGridManager::AGridManager()
@@ -25,8 +26,17 @@ void AGridManager::SpawnGrid()
 		{
 			GridTileLocation = CalculateGridTileLocation(IndexX, IndexY);
 			FloorMesh->AddInstance(FTransform(GridTileLocation), true);
-			ATileBase* SpawnedTile = GetWorld()->SpawnActor<ATileBase>(TileBase, FTransform(GridTileLocation));
-			TileBaseArray.Add(SpawnedTile);
+			ATileBase* SpawnedTile = GetWorld()->SpawnActorDeferred<ATileBase>(TileBase, FTransform(GridTileLocation));
+			if (SpawnedTile)
+			{
+				FIntPoint IndexPos = CalculateGridTileIndex(IndexX, IndexY);
+				SpawnedTile->Index = IndexPos;
+				//SpawnedTile->GridManager = this;
+
+				UGameplayStatics::FinishSpawningActor(SpawnedTile, FTransform(GridTileLocation));
+
+				TileBaseMap.Add(IndexPos,SpawnedTile);
+			}
 		}
 	}
 }
@@ -48,9 +58,28 @@ FVector AGridManager::CalculateGridTileLocation(float IndexX, float IndexY)
 	return Location;
 }
 
+FIntPoint AGridManager::CalculateGridTileIndex(float IndexX, float IndexY)
+{
+	FIntPoint TileIndex;
+	int Index;
+
+	Index = IndexY * GridTileCount.X;
+	Index += IndexX;
+
+	TileIndex.X = Index % GridTileCount.Y;
+	TileIndex.Y = Index / GridTileCount.Y;
+
+	return TileIndex;
+}
+
 void AGridManager::GridConstruction()
 {
 	SpawnGrid();
+
+	for (auto& tile : TileBaseMap)
+	{
+		tile.Value->SetNeighbors(this);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -60,6 +89,13 @@ void AGridManager::BeginPlay()
 
 	GridConstruction();
 	
+}
+
+ATileBase* AGridManager::GetTileAtPosition(FIntPoint pos)
+{
+	auto tile = TileBaseMap.FindRef(pos);
+
+	return tile;
 }
 
 // Called every frame

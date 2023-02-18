@@ -4,11 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include <TileBase.h>
 #include "Components/InstancedStaticMeshComponent.h" 
-
 #include "GridManager.generated.h"
 
+//Forward declaration
+class ATileBase;
 
 UCLASS()
 class TBS_PROJECT_API AGridManager : public AActor
@@ -32,6 +32,10 @@ public:
 	/** Calculates grid tile location for spawning the grid */
 	UFUNCTION(BlueprintCallable)
 		FVector CalculateGridTileLocation(float IndexX, float IndexY);
+
+	/** Calculates grid tile index */
+	UFUNCTION(BlueprintCallable)
+		FIntPoint CalculateGridTileIndex(float IndexX, float IndexY);
 
 public:
 
@@ -57,8 +61,11 @@ private:
 public:
 	/** Array of grid tiles */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Grid variables")
-		TArray<ATileBase*> TileBaseArray;
+		TMap<FIntPoint, ATileBase*> TileBaseMap;
 
+	/** Array of grid tiles */
+	UFUNCTION(BlueprintCallable)
+		ATileBase* GetTileAtPosition (FIntPoint pos);
 
 protected:
 	// Called when the game starts or when spawned
