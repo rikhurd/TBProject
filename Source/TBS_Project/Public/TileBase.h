@@ -38,7 +38,7 @@ public:
 		double F = G + H;
 
 	/** Array of neighboring grid tiles */
-	UPROPERTY(BlueprintReadOnly, Category = "Tile location variables")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Tile location variables")
 		TArray<ATileBase*> Neighbors;
 
 	/** Please add a variable description */
@@ -74,11 +74,15 @@ public:
 
 	/** Set connected tiles */
 	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
-		void SetConnections(ATileBase* tileBase);
+		void SetConnection(ATileBase* tileBase);
 
 	/** Set neighbor tiles */
 	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
 		void SetNeighbors(AGridManager* GridManager);
+
+	/** Set neighbor tiles */
+	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
+		float GetDistance(ATileBase* targetTile);
 
 protected:
 	// Called when the game starts or when spawned

@@ -36,14 +36,16 @@ void ATileBase::OnEndCursorOver_Implementation()
 void ATileBase::SetG(double InputG)
 {
 	G = InputG;
+	F = G + H;
 }
 
 void ATileBase::SetH(double InputH)
 {
 	H = InputH;
+	F = G + H;
 }
 
-void ATileBase::SetConnections(ATileBase* tileBase)
+void ATileBase::SetConnection(ATileBase* tileBase)
 {
 	Connection = tileBase;
 }
@@ -58,6 +60,18 @@ void ATileBase::SetNeighbors(AGridManager* GridManager)
 			Neighbors.Add(tileToAdd);
 		}
 	}
+}
+
+float ATileBase::GetDistance(ATileBase* targetTile)
+{
+	FIntPoint dist = FIntPoint(abs(Index.X - targetTile->Index.X), abs(Index.Y - targetTile->Index.Y));
+
+	int lowest = std::min(dist.X, dist.Y);
+	int highest = std::max(dist.X, dist.Y);
+
+	int horizontalMovesRequired = highest - lowest;
+
+	return (lowest * 14 + horizontalMovesRequired * 10);
 }
 
 /* Called when the game starts or when spawned*/

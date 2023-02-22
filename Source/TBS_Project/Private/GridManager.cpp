@@ -20,18 +20,17 @@ void AGridManager::SpawnGrid()
 {
 	FVector GridTileLocation;
 
-	for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
+	for (int IndexX = 0; IndexX != GridTileCount.X; ++IndexX)
 	{
-		for (int IndexX = 0; IndexX != GridTileCount.X; ++IndexX)
+		for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
 		{
 			GridTileLocation = CalculateGridTileLocation(IndexX, IndexY);
 			FloorMesh->AddInstance(FTransform(GridTileLocation), true);
 			ATileBase* SpawnedTile = GetWorld()->SpawnActorDeferred<ATileBase>(TileBase, FTransform(GridTileLocation));
 			if (SpawnedTile)
 			{
-				FIntPoint IndexPos = CalculateGridTileIndex(IndexX, IndexY);
+				FIntPoint IndexPos = FIntPoint(IndexX, IndexY);
 				SpawnedTile->Index = IndexPos;
-				//SpawnedTile->GridManager = this;
 
 				UGameplayStatics::FinishSpawningActor(SpawnedTile, FTransform(GridTileLocation));
 

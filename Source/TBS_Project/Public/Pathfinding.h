@@ -28,6 +28,6 @@ public:
 
 
 public:
-	static void FindPath(ATileBase* startNode, ATileBase* targetNode);
-
+	UFUNCTION(BlueprintCallable, Category = "Find Path function")
+	static TArray<ATileBase*> FindPath(ATileBase* startNode, ATileBase* targetNode);
 };
