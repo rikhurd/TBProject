@@ -43,9 +43,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Grid components")
 		TObjectPtr<UInstancedStaticMeshComponent> FloorMesh;
 
-	/** Please add a variable description 
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
-		TObjectPtr<ABP_GameMode> GameModeRef;*/
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Grid components")
+		TObjectPtr<UInstancedStaticMeshComponent> WallMesh;
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Grid variables")

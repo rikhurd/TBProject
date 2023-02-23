@@ -64,7 +64,7 @@ TArray<ATileBase*> APathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 		//Process walkable and non-processed tiles here
 		for (auto* neighbor : current->Neighbors)
 		{
-			if (!processed.Contains(neighbor))
+			if ( neighbor->Walkable == true && !processed.Contains(neighbor))
 			{
 				bool inSearch = toSearch.Contains(neighbor);
 

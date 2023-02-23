@@ -37,8 +37,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Pathfinding Variables")
 		double F = G + H;
 
+	/** Can any actor be on this tile */
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Pathfinding Variables")
+		bool Walkable = true;
+
 	/** Array of neighboring grid tiles */
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Tile location variables")
+	UPROPERTY(BlueprintReadOnly, Category = "Tile location variables")
 		TArray<ATileBase*> Neighbors;
 
 	/** Please add a variable description */
