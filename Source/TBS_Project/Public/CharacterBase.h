@@ -20,6 +20,7 @@ class TBS_PROJECT_API ACharacterBase : public APaperZDCharacter, public IAbility
 	GENERATED_BODY()
 	
 public:
+	ACharacterBase();
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
@@ -37,4 +38,14 @@ public:
 	{
 		return AbilitySystemComponent;
 	}
+
+protected:
+
+	UPROPERTY()
+		const class UCharacterAttributeSet* AttributeSet;
+
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+
 };
