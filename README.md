@@ -1,4 +1,4 @@
-# TBS_Project
+# Turn Based Roleplaying Game Project
 
 Developed with Unreal Engine 5
 
