@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "PaperZDCharacter.h"
+#include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
 
 #include "CharacterBase.generated.h"
@@ -15,7 +15,7 @@ class ATileBase;
  * 
  */
 UCLASS()
-class TBS_PROJECT_API ACharacterBase : public APaperZDCharacter, public IAbilitySystemInterface
+class TBS_PROJECT_API ACharacterBase : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 	
