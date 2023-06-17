@@ -4,29 +4,13 @@
 #include "Pathfinding.h"
 #include "TileBase.h"
 
-// Sets default values
-APathfinding::APathfinding()
+/* Sets default values
+UPathfinding::UPathfinding()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
 
-}
+}*/
 
-// Called when the game starts or when spawned
-void APathfinding::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void APathfinding::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
-TArray<ATileBase*> APathfinding::FindPath(ATileBase* startNode, ATileBase* targetNode)
+TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targetNode)
 {
 	TArray<ATileBase*> toSearch;
 	toSearch.Add(startNode);

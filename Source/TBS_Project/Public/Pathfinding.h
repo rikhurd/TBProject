@@ -3,31 +3,21 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "Kismet/BlueprintFunctionLibrary.h"
 #include "Pathfinding.generated.h"
 
 //Forward declaration
 class ATileBase;
 
 UCLASS()
-class TBS_PROJECT_API APathfinding : public AActor
+class TBS_PROJECT_API UPathfinding : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
-	
+
 public:	
 	// Sets default values for this actor's properties
-	APathfinding();
+	//UPathfinding();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-
-public:
 	UFUNCTION(BlueprintCallable, Category = "Find Path function")
 	static TArray<ATileBase*> FindPath(ATileBase* startNode, ATileBase* targetNode);
 };
