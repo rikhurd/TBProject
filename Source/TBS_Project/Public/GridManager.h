@@ -39,11 +39,11 @@ public:
 
 public:
 
-	/** Please add a variable description */
+	/** Basic mesh for walkable tiles */
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Grid components")
 		TObjectPtr<UInstancedStaticMeshComponent> FloorMesh;
 
-	/** Please add a variable description */
+	/** Wall mesh is used later for creating impassable tiles on the grid not yet implemented */
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Grid components")
 		TObjectPtr<UInstancedStaticMeshComponent> WallMesh;
 
@@ -51,19 +51,20 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Grid variables")
 		FIntPoint GridTileCount = 10;
 private:
-	/** Please add a variable description */
+	/** GridSnapValue is only used for placing the grid on the level. Snap comes from Unreal Engine's Grid Snap value in editor */
 	UPROPERTY(EditDefaultsOnly, Category = "Grid variables")
 		float GridSnapValue = 100;
 
+	/* Subclass of the tile base that populates the grid */
 	UPROPERTY(EditAnywhere, Category = "Grid components")
 		TSubclassOf<ATileBase> TileBase;
 
 public:
-	/** Array of grid tiles */
+	/** Map of grid tiles. Map is because int point can be used to determine tile position in grid */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Grid variables")
 		TMap<FIntPoint, ATileBase*> TileBaseMap;
 
-	/** Array of grid tiles */
+	/** Gets tile position based on TileBaseMap's intpoint */
 	UFUNCTION(BlueprintCallable)
 		ATileBase* GetTileAtPosition (FIntPoint pos);
 

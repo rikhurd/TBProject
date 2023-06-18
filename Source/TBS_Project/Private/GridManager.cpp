@@ -75,6 +75,7 @@ void AGridManager::GridConstruction()
 {
 	SpawnGrid();
 
+	//Sets tile neighbors based on intpoint values
 	for (auto& tile : TileBaseMap)
 	{
 		tile.Value->SetNeighbors(this);

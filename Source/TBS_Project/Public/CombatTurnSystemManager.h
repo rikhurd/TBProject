@@ -3,15 +3,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
+#include "Abilities/GameplayAbility.h"
 #include "CombatTurnSystemManager.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TBS_PROJECT_API UCombatTurnSystemManager : public UBlueprintFunctionLibrary
+class TBS_PROJECT_API UCombatTurnSystemManager : public UObject
 {
 	GENERATED_BODY()
+
+//public:
+	/**  
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Combat Turn System Variables")
+	TArray<UGameplayAbility> G;*/
 
 };
