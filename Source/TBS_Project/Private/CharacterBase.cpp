@@ -5,10 +5,13 @@
 #include "TileBase.h"
 #include "AbilitySystemComponent.h"
 #include "CharacterAttributeSet.h"
+#include "AbilityHandlerComponent.h"
 
 ACharacterBase::ACharacterBase()
 {
+	AbilityHandlerComponent = CreateDefaultSubobject<UAbilityHandlerComponent>(TEXT("Ability Handler Component"));
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("Ability System Component"));
+
 }
 
 void ACharacterBase::BeginPlay()

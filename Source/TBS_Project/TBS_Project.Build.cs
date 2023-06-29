@@ -8,7 +8,7 @@ public class TBS_Project : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D","PaperZD"});
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Paper2D","PaperZD", "GameplayTasks"});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
