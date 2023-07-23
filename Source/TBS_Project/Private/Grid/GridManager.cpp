@@ -13,7 +13,6 @@ AGridManager::AGridManager()
 	FloorMesh = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("InstancedStaticMeshComponent"));
 	FloorMesh->SetCollisionProfileName("NoCollision");
 	RootComponent = FloorMesh;
-
 }
 
 void AGridManager::SpawnGrid()
@@ -24,10 +23,8 @@ void AGridManager::SpawnGrid()
 	{
 		for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
 		{
-			GridTileLocation = CalculateGridTileLocation(IndexX, IndexY);
-			FloorMesh->AddInstance(FTransform(GridTileLocation), true);
-			ATileBase* SpawnedTile = GetWorld()->SpawnActorDeferred<ATileBase>(TileBase, FTransform(GridTileLocation));
-			if (SpawnedTile)
+			GridTileLocation = CalculateGridTileLocation(IndexX, IndexY);	
+			if (ATileBase* SpawnedTile = GetWorld()->SpawnActorDeferred<ATileBase>(TileBase, FTransform(GridTileLocation)))
 			{
 				FIntPoint IndexPos = FIntPoint(IndexX, IndexY);
 				SpawnedTile->Index = IndexPos;
@@ -42,13 +39,7 @@ void AGridManager::SpawnGrid()
 
 FVector AGridManager::CalculateGridTileLocation(float IndexX, float IndexY)
 {
-	float X;
-	float Y;
-
-	X = IndexX - (GridTileCount.X / 2);
-	Y = IndexY - (GridTileCount.Y / 2);
-
-	FVector Location = FVector(X, Y, 0);
+	FVector Location = FVector(IndexX, IndexY, 0);
 	Location *= GridSnapValue;
 
 	Location = Location + (GridSnapValue * FVector(0.5, 0.5, 0));
@@ -71,8 +62,11 @@ FIntPoint AGridManager::CalculateGridTileIndex(float IndexX, float IndexY)
 	return TileIndex;
 }
 
-void AGridManager::GridConstruction()
+// Called when the game starts or when spawned
+void AGridManager::BeginPlay()
 {
+	Super::BeginPlay();
+
 	SpawnGrid();
 
 	//Sets tile neighbors based on intpoint values
@@ -82,15 +76,6 @@ void AGridManager::GridConstruction()
 	}
 }
 
-// Called when the game starts or when spawned
-void AGridManager::BeginPlay()
-{
-	Super::BeginPlay();
-
-	GridConstruction();
-	
-}
-
 ATileBase* AGridManager::GetTileAtPosition(FIntPoint pos)
 {
 	auto tile = TileBaseMap.FindRef(pos);
@@ -98,10 +83,22 @@ ATileBase* AGridManager::GetTileAtPosition(FIntPoint pos)
 	return tile;
 }
 
-// Called every frame
-void AGridManager::Tick(float DeltaTime)
+void AGridManager::SpawnPreviewGrid()
 {
-	Super::Tick(DeltaTime);
+	// Clear instances before spawning new ones
+	FloorMesh->ClearInstances();
 
+	for (int IndexX = 0; IndexX != GridTileCount.X; ++IndexX)
+	{
+		for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
+		{
+			FloorMesh->AddInstance(FTransform(CalculateGridTileLocation(IndexX, IndexY)), true);
+		}
+	}
+}
+
+void AGridManager::DestroyPreviewGrid()
+{
+	FloorMesh->ClearInstances();
 }
 

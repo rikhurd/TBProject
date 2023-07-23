@@ -14,24 +14,15 @@ ATileBase::ATileBase()
 
 	RootComponent = SceneComponent;
 
+	// Make box collision which handles the collision for mouse
 	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollisionComponent"));
-	BoxCollision->SetBoxExtent(FVector(50, 50, 16));
+	BoxCollision->SetBoxExtent(FVector(100, 100, 16));
 	BoxCollision->SetCollisionProfileName("TileCollision");
 	
 	BoxCollision->SetupAttachment(RootComponent);
 	BoxCollision->AddLocalOffset(FVector(0, 0, -15));
 
 }
-
-/*
-void ATileBase::OnBeginCursorOver_Implementation()
-{
-}
-
-void ATileBase::OnEndCursorOver_Implementation()
-{
-}
-*/
 
 void ATileBase::SetG(double InputG)
 {

@@ -26,15 +26,15 @@ public:
 		FIntPoint Index;
 
 	/** Distance from the tile to the start tile */
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Pathfinding Variables")
+	UPROPERTY(BlueprintReadOnly, Category = "Pathfinding Variables")
 		double G;
 
 	/** Distance from the tile to the target tile */
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Pathfinding Variables")
+	UPROPERTY(BlueprintReadOnly, Category = "Pathfinding Variables")
 		double H;
 
 	/** G + H */
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Pathfinding Variables")
+	UPROPERTY(BlueprintReadOnly, Category = "Pathfinding Variables")
 		double F = G + H;
 
 	/** Can any actor be on this tile */
