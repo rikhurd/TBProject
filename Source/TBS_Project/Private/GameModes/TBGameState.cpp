@@ -4,6 +4,23 @@
 #include "GameModes/TBGameState.h"
 #include "GameFramework/PlayerState.h"
 
+/*
+void ATBGameState::SetCombatPawns()
+{
+	CombatPawns.Empty();
+
+	/* Iterates whole player list which size is 1 because of only singleplayer is implemented
+		- Later could be fetch from game's start menu when playing singleplayer -> PlayerState is set as a variable
+		
+	for (APlayerState* PlayerState : PlayerArray)
+	{
+		//CombatPawns.Append(PlayerState);
+	}
+	// Get enemy actors in here from enemy unit handler
+
+}
+*/
+
 /* Calls setup function with the given enum choice */
 void ATBGameState::SetGameStateMode_Implementation(EGameStateMode GameMode)
 {
@@ -23,12 +40,14 @@ void ATBGameState::SetGameStateMode_Implementation(EGameStateMode GameMode)
 /* Setups combat mode for the current players */
 void ATBGameState::SetupCombatMode()
 {
-	/* Iterates whole player list which size is 1 because of only singleplayer is implemented */
+	/* Iterates whole player list which size is 1 because of only singleplayer is implemented
+		- Later could be fetch from game's start menu when playing singleplayer -> PlayerState is set as a variable*/
 	for (APlayerState* PlayerState : PlayerArray)
 	{
+		/* Checks if interface is implemented */
 		if (PlayerState->Implements<UTBGameStateChangeInterface>())
 		{
-			
+			/* Sends call on the player state */
 			ITBGameStateChangeInterface::Execute_CombatModeInit(PlayerState);
 		}
 	}

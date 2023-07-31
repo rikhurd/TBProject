@@ -10,17 +10,23 @@ AGridManager::AGridManager()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	
-	FloorMesh = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("InstancedStaticMeshComponent"));
-	FloorMesh->SetCollisionProfileName("NoCollision");
-	RootComponent = FloorMesh;
+
 }
 
 void AGridManager::SpawnGrid()
 {
 	FVector GridTileLocation;
 
+	TArray<AActor*> AttachedActors;
+	GetAttachedActors(AttachedActors);
+	
+	/* Remove old attached actors in this Grid Manager */
+	for (AActor* AttachedTileActor : AttachedActors)
+		if (AttachedTileActor->IsA(ATileBase::StaticClass()))
+			AttachedTileActor->Destroy();
+
+	/* Spawns the grid and calculates needed positions */
 	for (int IndexX = 0; IndexX != GridTileCount.X; ++IndexX)
-	{
 		for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
 		{
 			GridTileLocation = CalculateGridTileLocation(IndexX, IndexY);	
@@ -28,13 +34,20 @@ void AGridManager::SpawnGrid()
 			{
 				FIntPoint IndexPos = FIntPoint(IndexX, IndexY);
 				SpawnedTile->Index = IndexPos;
-
+				
 				UGameplayStatics::FinishSpawningActor(SpawnedTile, FTransform(GridTileLocation));
+
+				// Attach tile actor to the grid for group movement and deleting when spawning new grid.
+				SpawnedTile->AttachToActor(this,FAttachmentTransformRules
+					(EAttachmentRule::KeepRelative,EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false));
 
 				TileBaseMap.Add(IndexPos,SpawnedTile);
 			}
 		}
-	}
+
+	//Sets tile neighbors based on intpoint values
+	for (auto& tile : TileBaseMap)
+		tile.Value->SetNeighbors(this);
 }
 
 FVector AGridManager::CalculateGridTileLocation(float IndexX, float IndexY)
@@ -43,7 +56,6 @@ FVector AGridManager::CalculateGridTileLocation(float IndexX, float IndexY)
 	Location *= GridSnapValue;
 
 	Location = Location + (GridSnapValue * FVector(0.5, 0.5, 0));
-	Location += GetActorLocation();
 
 	return Location;
 }
@@ -62,43 +74,9 @@ FIntPoint AGridManager::CalculateGridTileIndex(float IndexX, float IndexY)
 	return TileIndex;
 }
 
-// Called when the game starts or when spawned
-void AGridManager::BeginPlay()
-{
-	Super::BeginPlay();
-
-	SpawnGrid();
-
-	//Sets tile neighbors based on intpoint values
-	for (auto& tile : TileBaseMap)
-	{
-		tile.Value->SetNeighbors(this);
-	}
-}
-
 ATileBase* AGridManager::GetTileAtPosition(FIntPoint pos)
 {
 	auto tile = TileBaseMap.FindRef(pos);
 
 	return tile;
 }
-
-void AGridManager::SpawnPreviewGrid()
-{
-	// Clear instances before spawning new ones
-	FloorMesh->ClearInstances();
-
-	for (int IndexX = 0; IndexX != GridTileCount.X; ++IndexX)
-	{
-		for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
-		{
-			FloorMesh->AddInstance(FTransform(CalculateGridTileLocation(IndexX, IndexY)), true);
-		}
-	}
-}
-
-void AGridManager::DestroyPreviewGrid()
-{
-	FloorMesh->ClearInstances();
-}
-

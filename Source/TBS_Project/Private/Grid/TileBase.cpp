@@ -3,6 +3,7 @@
 
 #include "Grid/TileBase.h"
 #include "Grid/GridManager.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 ATileBase::ATileBase()

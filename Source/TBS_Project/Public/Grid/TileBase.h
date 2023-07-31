@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Math/IntPoint.h"
+
 #include "TileBase.generated.h"
 
 //Forward declaration
 class AGridManager;
+class UBoxComponent;
 
 UCLASS(Blueprintable)
 class TBS_PROJECT_API ATileBase : public AActor
@@ -47,11 +48,11 @@ public:
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
-		TObjectPtr<UBoxComponent> BoxCollision;
+		UBoxComponent* BoxCollision;
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
-		TObjectPtr<USceneComponent> SceneComponent;
+		USceneComponent* SceneComponent;
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
