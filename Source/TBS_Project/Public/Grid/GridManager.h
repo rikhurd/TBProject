@@ -9,6 +9,7 @@
 
 //Forward declaration
 class ATileBase;
+class ATBSEntranceCollision;
 
 UCLASS()
 class TBS_PROJECT_API AGridManager : public AActor
@@ -36,12 +37,20 @@ public:
 
 private:
 
-	/* Subclass of the tile base that populates the grid */
-	UPROPERTY(VisibleAnywhere, Category = "Grid variables")
+	/** Actor's scene component which is needed for things like position in the world */
+	UPROPERTY()
+		USceneComponent* SceneComponent;
+
+	/*
+	Subclass of the tile base that populates the grid
+	This may change later to a static class when modifying TileBase class later
+	Currently this is set in editor so we can use the Blueprint deprived class too.
+	*/
+	UPROPERTY(EditAnywhere, Category = "Grid variables")
 		TSubclassOf<ATileBase> TileBase;
 
 	/** Used to spawn the grid to manager's location */
-	UFUNCTION(CallInEditor, Category = "Grid spawn")
+	UFUNCTION(CallInEditor, Category = "Grid spawner")
 		void SpawnGrid();
 
 	/** Calculates grid tile location for spawning the grid */

@@ -52,10 +52,6 @@ public:
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
-		USceneComponent* SceneComponent;
-
-	/** Please add a variable description */
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
 		ATileBase* Connection;
 
 	/* Currently done in child Blueprint
@@ -89,15 +85,11 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Set Variable Functions")
 		float GetDistance(ATileBase* targetTile);
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 private:
+
+	/** Actor's scene component which is needed for things like position in the world */
+	UPROPERTY()
+		USceneComponent* SceneComponent;
 
 	/** Array of neighboring tile directions */
 		const TArray<FIntPoint> Dirs = {

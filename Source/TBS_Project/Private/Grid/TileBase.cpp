@@ -13,7 +13,7 @@ ATileBase::ATileBase()
 
 	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
 
-	RootComponent = SceneComponent;
+	SetRootComponent(SceneComponent);
 
 	// Make box collision which handles the collision for mouse
 	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollisionComponent"));
@@ -65,18 +65,3 @@ float ATileBase::GetDistance(ATileBase* targetTile)
 
 	return (lowest * 14 + horizontalMovesRequired * 10);
 }
-
-/* Called when the game starts or when spawned*/
-void ATileBase::BeginPlay()
-{
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void ATileBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

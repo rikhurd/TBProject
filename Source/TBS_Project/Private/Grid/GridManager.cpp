@@ -3,6 +3,7 @@
 
 #include "Grid/GridManager.h"
 #include "Grid/TileBase.h"
+#include "Grid/TBSEntranceCollision.h"
 
 // Sets default values
 AGridManager::AGridManager()
@@ -10,7 +11,12 @@ AGridManager::AGridManager()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	
+	/* Set root component for grid. Needed for moving around in editor. */
+	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	SetRootComponent(SceneComponent);
 
+	//Set default as C++ TileBase. Otherwise default value would be none
+	TileBase = ATileBase::StaticClass();
 }
 
 void AGridManager::SpawnGrid()

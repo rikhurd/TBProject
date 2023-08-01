@@ -12,7 +12,7 @@
 
 //Forward declaration
 class ATileBase;
-class UAbilityHandlerComponent;
+class UTBAbilityHandlerComponent;
 
 /**
  * 
@@ -34,7 +34,7 @@ public:
 		void UpdateCurrentTile(ATileBase* Tile);
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
-		class UAbilityHandlerComponent* AbilityHandlerComponent;
+		class UTBAbilityHandlerComponent* AbilityHandlerComponent;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
 		class UAbilitySystemComponent* AbilitySystemComponent;
