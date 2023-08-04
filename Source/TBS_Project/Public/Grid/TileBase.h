@@ -43,15 +43,13 @@ public:
 		bool Walkable = true;
 
 	/** Array of neighboring grid tiles */
-	UPROPERTY(BlueprintReadOnly, Category = "Tile location variables")
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Tile location variables")
 		TArray<ATileBase*> Neighbors;
 
-	/** Please add a variable description */
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
+	/** Collision component. Shows grid size and location in the game and editor */
 		UBoxComponent* BoxCollision;
 
 	/** Please add a variable description */
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Components")
 		ATileBase* Connection;
 
 	/* Currently done in child Blueprint

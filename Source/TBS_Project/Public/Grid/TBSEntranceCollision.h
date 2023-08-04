@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/BoxComponent.h"
+
 #include "TBSEntranceCollision.generated.h"
 
 /**
@@ -12,6 +12,7 @@
  */
 class UBoxComponent;
 class AGridManager;
+class ATileBase;
 
 UCLASS()
 class TBS_PROJECT_API ATBSEntranceCollision : public AActor
@@ -25,12 +26,24 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Components")
 		UBoxComponent* BoxCollision;
 
-	/** Please add a variable description */
+	/** Please add a variable description 
 	UPROPERTY(BlueprintReadOnly, EditInstanceOnly, Category = "Components")
 		AGridManager* ConnectedGrid;
-
-	/* Declare overlap event
-	UFUNCTION()
-		void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 		*/
+
+	/** Array of tiles that this entrance overlaps and are set as entrance on the grid */
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Overlapping Tiles")
+		TArray<AActor*> EntranceTiles;
+
+	/* */
+	UFUNCTION(CallInEditor, Category = "Overlap Collission")
+		void CheckCollision();
+
+	//~AActor interface
+	//virtual void PostLoad() override;
+	//virtual void BeginPlay() override;
+	//~End of AActor interface
+
+	bool TBSIsInsideXY(const FVector& In) const;
+	
 };

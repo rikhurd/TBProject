@@ -66,6 +66,8 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 				if (!inSearch || costToNeighbor < neighbor->G)
 				{
 					neighbor->SetG(costToNeighbor);
+
+					//TODO: Check this functions necessity
 					neighbor->SetConnection(current);
 
 					if (!inSearch)
