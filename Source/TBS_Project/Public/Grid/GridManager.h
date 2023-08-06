@@ -67,8 +67,5 @@ public:
 	UFUNCTION(BlueprintCallable)
 		ATileBase* GetTileAtPosition(FIntPoint pos);
 
-//protected:
-	// Called when the game starts or when spawned
-	// virtual void BeginPlay() override;
 
 };

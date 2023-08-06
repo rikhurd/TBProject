@@ -3,6 +3,13 @@
 
 #include "Player/TBPlayerState.h"
 
+TArray<APawn*> ATBPlayerState::SetPlayerTeamPawns()
+{
+	PlayerTeamPawns.Empty();
+	PlayerTeamPawns.Add(GetPawn());
+	return PlayerTeamPawns;
+}
+
 void ATBPlayerState::CombatModeInit_Implementation()
 {
 

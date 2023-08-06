@@ -3,7 +3,6 @@
 
 #include "Grid/GridManager.h"
 #include "Grid/TileBase.h"
-#include "Grid/TBSEntranceCollision.h"
 
 // Sets default values
 AGridManager::AGridManager()

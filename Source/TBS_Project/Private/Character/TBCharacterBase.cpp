@@ -9,7 +9,7 @@
 
 ATBCharacterBase::ATBCharacterBase()
 {
-	AbilityHandlerComponent = CreateDefaultSubobject<UAbilityHandlerComponent>(TEXT("Ability Handler Component"));
+	AbilityHandlerComponent = CreateDefaultSubobject<UTBAbilityHandlerComponent>(TEXT("Ability Handler Component"));
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("Ability System Component"));
 
 }

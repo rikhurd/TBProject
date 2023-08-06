@@ -11,17 +11,12 @@ ATileBase::ATileBase()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
-
-	
-
 	// Make box collision which handles the collision for mouse
 	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollisionComponent"));
 	BoxCollision->SetBoxExtent(FVector(100, 100, 16));
 	BoxCollision->SetCollisionProfileName("TileCollision");
 	
 	SetRootComponent(BoxCollision);
-	//BoxCollision->SetupAttachment(RootComponent);
 	BoxCollision->AddLocalOffset(FVector(0, 0, -15));
 
 }

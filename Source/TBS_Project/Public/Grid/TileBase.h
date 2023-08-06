@@ -85,10 +85,6 @@ public:
 
 private:
 
-	/** Actor's scene component which is needed for things like position in the world */
-	UPROPERTY()
-		USceneComponent* SceneComponent;
-
 	/** Array of neighboring tile directions */
 		const TArray<FIntPoint> Dirs = {
 		FIntPoint(0, 1), FIntPoint(-1, 0), FIntPoint(0, -1), FIntPoint(1, 0),

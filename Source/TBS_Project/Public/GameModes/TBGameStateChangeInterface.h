@@ -8,6 +8,8 @@
 
 // This class does not need to be modified.
 
+/* Enum for switching between game states.
+Mostly using enums because of blueprints */
 UENUM(BlueprintType)
 enum class EGameStateMode : uint8
 {
@@ -42,4 +44,8 @@ public:
 	// Initializes Eploration mode. Enables free 3D movement etc.
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Game State Change Functions")
 		void ExplorationModeInit();
+
+	// Initializes Eploration mode. Enables free 3D movement etc.
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Game State Change Functions")
+		void GetPlayerStatePawns();
 };
