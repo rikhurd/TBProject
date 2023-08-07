@@ -4,27 +4,32 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+
 #include "TBAbilityHandlerComponent.generated.h"
 
+class ATBGameState;
 class UGameplayAbilityBase;
-class UCombatTurnSystemManager;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class TBS_PROJECT_API UAbilityHandlerComponent : public UActorComponent
+class TBS_PROJECT_API UTBAbilityHandlerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UAbilityHandlerComponent();
+	UTBAbilityHandlerComponent();
 
 	/* Current ability to be handled */
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
 		class UGameplayAbilityBase* CurrentAbility;
 
-	/** Updates given ability to be used  */
-	UFUNCTION(BlueprintCallable)
-		void UpdateCurrentAbility(UGameplayAbilityBase* Ability);
+	/** Set given ability to be used  */
+	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
+		void SetNewAbility(UGameplayAbilityBase* Ability);
+
+	/** Progress ability's state.  */
+	UFUNCTION(Category = "Ability Handler")
+		void ProgressAbilityState();
 
 	/*
 protected:
@@ -35,5 +40,7 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	*/
-		
+private:
+	UPROPERTY(VisibleDefaultsOnly, Category = "Ability Handler")
+		class ATBGameState* GameState;
 };
