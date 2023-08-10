@@ -96,6 +96,10 @@ void ATBEntranceCollision::OnOverlapBegin(class UPrimitiveComponent* OverlappedC
 		/*
 		Placeholder. Currently update characters tile to the first tile in the array.
 		This will be changed where characters would be able to placed on any tile.
+
+		What this eventually will become is a call in player controller.
+		That call takes in the entrance tiles and handles the pre placement of characters in the grid before the real combat begins.
+			Call is done in controller because of multiplayer possibility later.
 		*/
 		ATBCharacterBase* CastedCharacter = Cast<ATBCharacterBase>(OtherActor);
 
