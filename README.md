@@ -20,4 +20,4 @@ Left click - Move to the tile if path is found
 Hold left shift and move cursor on the grid paints unwalkable walls on the grid.
 Tap right click to cancel pathfinding.
 
-PS: GitHub pages are under construct until I have more things to show from this project. Probably updating after being done with Combat system.
+UPDATE: Working on adding Gameplay Ability System integration and basic combat abilities. Progress at the moment is slow while I also read upon Game Engine Architecture in general.
