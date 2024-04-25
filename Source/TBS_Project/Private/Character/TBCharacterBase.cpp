@@ -6,12 +6,14 @@
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/Attributes/CharacterAttributeSet.h"
 #include "AbilitySystem/Abilities/TBAbilityHandlerComponent.h"
+#include "Grid/ActorTileAnchor.h"
 
 ATBCharacterBase::ATBCharacterBase()
 {
 	AbilityHandlerComponent = CreateDefaultSubobject<UTBAbilityHandlerComponent>(TEXT("Ability Handler Component"));
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("Ability System Component"));
 
+	TileAnchor = CreateDefaultSubobject<UActorTileAnchor>(TEXT("TileAnchor"));
 }
 
 void ATBCharacterBase::BeginPlay()
@@ -23,11 +25,5 @@ void ATBCharacterBase::BeginPlay()
 		// Get the UCharacterAttributeSet from our Ability System Component. The Ability System Component will create and register one if needed.
 		AttributeSet = AbilitySystemComponent->GetSet<UCharacterAttributeSet>();
 	}
-}
-
-/* Change this later to be made from ability Move */
-void ATBCharacterBase::UpdateCurrentTile(ATileBase* Tile)
-{
-	CurrentTile = Tile;
 }
 

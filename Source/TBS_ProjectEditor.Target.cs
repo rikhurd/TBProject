@@ -8,7 +8,7 @@ public class TBS_ProjectEditorTarget : TargetRules
 	public TBS_ProjectEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-		DefaultBuildSettings = BuildSettingsVersion.V2;
+		DefaultBuildSettings = BuildSettingsVersion.V4;
 
 		ExtraModuleNames.AddRange( new string[] { "TBS_Project" } );
 	}

@@ -22,8 +22,8 @@ void UTBAbilityHandlerComponent::SetNewAbility(UGameplayAbilityBase* Ability)
 {
 	CurrentAbility = Ability;
 
+	/* Bind new set ability into the delegate that progress ability. */
 	GameState->ProgressCombatAbilitiesDelegate.AddUObject(this,&UTBAbilityHandlerComponent::ProgressAbilityState);
-	//SetAbilityToArray();
 }
 
 void UTBAbilityHandlerComponent::ProgressAbilityState()

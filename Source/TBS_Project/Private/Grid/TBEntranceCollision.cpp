@@ -37,7 +37,7 @@ Check collision WHEN:
 		(OPTIONAL Boolean later) Player has pressed a key to enter into the grid's room. Player must make a conscious decision to enter themselves
 			When player pressed a key in the collision. Check entrance tiles and player has to place its characters on the grids so the combat can start
 */
-void ATBEntranceCollision::CheckCollision()
+void ATBEntranceCollision::CheckOverlapTiles()
 {
 	EntranceTiles.Empty();
 	TArray<AActor*> FoundTiles;
@@ -84,36 +84,34 @@ void ATBEntranceCollision::OnOverlapBegin(class UPrimitiveComponent* OverlappedC
 {
 	if (OtherActor->GetClass()->IsChildOf(ATBCharacterBase::StaticClass()))
 	{
-		CheckCollision();
+		CheckOverlapTiles();
 
 		UE_LOG(LogTemp, Warning, TEXT("Actor overlapped entrance collision: %s"), *OtherActor->GetName());
 
-		/* Execute Set Game State mode to call a delegate that fires off other calls that are needed for changing Game Sate Mode */
-		AGameStateBase* GameState = GetWorld()->GetGameState();
-		if (GameState->Implements<UTBGameStateChangeInterface>())
-			ITBGameStateChangeInterface::Execute_SetGameStateMode(GameState, EGameStateMode::Combat);
-
-		/*
-		Placeholder. Currently update characters tile to the first tile in the array.
-		This will be changed where characters would be able to placed on any tile.
-
-		What this eventually will become is a call in player controller.
-		That call takes in the entrance tiles and handles the pre placement of characters in the grid before the real combat begins.
-			Call is done in controller because of multiplayer possibility later.
-		*/
-		ATBCharacterBase* CastedCharacter = Cast<ATBCharacterBase>(OtherActor);
-
-
-
 		if (EntranceTiles.IsValidIndex(0))
 		{
+
+			/* Execute Set Game State mode to call a delegate that fires off other calls that are needed for changing Game Sate Mode */
+			AGameStateBase* GameState = GetWorld()->GetGameState();
+			if (GameState->Implements<UTBGameStateChangeInterface>())
+				ITBGameStateChangeInterface::Execute_SetGameStateMode(GameState, EGameStateMode::Combat);
+
+			/*
+			Placeholder. Currently update characters tile to the first tile in the array.
+			This will be changed where characters would be able to placed on any tile.
+
+			What this eventually will become is a call in player controller.
+			That call takes in the entrance tiles and handles the pre placement of characters in the grid before the real combat begins.
+				Call is done in controller because of multiplayer possibility later.
+			*/
+			ATBCharacterBase* CastedCharacter = Cast<ATBCharacterBase>(OtherActor);
+
 			CastedCharacter->SetActorLocation(FVector(EntranceTiles[0]->GetActorLocation().X,
 																EntranceTiles[0]->GetActorLocation().Y,
 																CastedCharacter->GetActorLocation().Z));
 
-			CastedCharacter->UpdateCurrentTile(EntranceTiles[0]);
+			//CastedCharacter->UpdateCharacterTile(EntranceTiles[0]);
 		}
-
 
 	}
 }

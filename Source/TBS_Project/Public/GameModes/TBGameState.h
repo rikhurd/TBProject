@@ -38,20 +38,15 @@ public:
 	CHANGE THIS LATER FOR A DELEGATE(?)*/
 	virtual void SetGameStateMode_Implementation(EGameStateMode GameMode) override;
 
-	/** Please add a function description */
+	/** Sets up combat mode when entering combat zone. */
 	UFUNCTION(BlueprintCallable)
 		void SetupCombatMode();
 
-	/** Please add a function description */
+	/** Sets up exploration mode usually when leaving combat. */
 	UFUNCTION(BlueprintCallable)
 		void SetupExplorationMode();
 
-	/** Default scene root
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Default")
-		TObjectPtr<USceneComponent> DefaultSceneRoot;*/
-
-	/** Please add a variable description 
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
-		TEnumAsByte<E_GameStateModes> GameStateMode;*/
-
+	/** Progresses combat abilities execute time. */
+	UFUNCTION(BlueprintCallable)
+		void ProgressCombatAbilities();
 };

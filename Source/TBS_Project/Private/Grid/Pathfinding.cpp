@@ -20,6 +20,7 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 	while (!toSearch.IsEmpty())
 	{
 		/*
+		THIS MAY LATER BE DELETED because of movement changes on players. However could still be useful for queue player movement or enemy AI calculation of player location.
 		OPTIMIZE THIS
 		Currently finding best F cost node is the best way to optimize pathfinding
 		Even though it is probably not necessary for project this big,
@@ -29,7 +30,7 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 
 		*/
 		ATileBase* current = toSearch[0];
-		for (auto node : toSearch)
+		for (ATileBase* node : toSearch)
 		{
 			if (node->F < current->F || node->F == current->F && node->H < current->H)
 				current = node;

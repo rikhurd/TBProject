@@ -13,6 +13,7 @@
 //Forward declaration
 class ATileBase;
 class UTBAbilityHandlerComponent;
+class UActorTileAnchor;
 
 /**
  * 
@@ -29,10 +30,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
 		class ATileBase* CurrentTile;
 
-	/** Please add a function description  */
-	UFUNCTION(BlueprintCallable)
-		void UpdateCurrentTile(ATileBase* Tile);
-
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
 		class UTBAbilityHandlerComponent* AbilityHandlerComponent;
 
@@ -47,7 +44,10 @@ public:
 
 protected:
 
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+		class UActorTileAnchor* TileAnchor;
+
+	//UPROPERTY()
 		const class UCharacterAttributeSet* AttributeSet;
 
 	// Called when the game starts or when spawned

@@ -18,7 +18,6 @@ ATileBase::ATileBase()
 	
 	SetRootComponent(BoxCollision);
 	BoxCollision->AddLocalOffset(FVector(0, 0, -15));
-
 }
 
 void ATileBase::SetG(double InputG)

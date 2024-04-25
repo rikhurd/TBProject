@@ -13,4 +13,14 @@ UCLASS()
 class TBS_PROJECT_API ATBPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+protected:
+
+	/** Called for movement input
+	void Move(const FInputActionValue& Value);
+
+	/** Called for looking input 
+	void Look(const FInputActionValue& Value);*/
+
 };
+

@@ -26,7 +26,7 @@ public:
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Grid variables")
-		FIntPoint GridTileCount = 3;
+		FIntPoint GridTileCount = { 3,3 };
 
 	/** GridSnapValue is only used for placing the grid on the level. Name comes from Unreal Engine's Grid Snap value in editor
 	This should be x + y of the box extent of the tile
@@ -50,7 +50,7 @@ private:
 		TSubclassOf<ATileBase> TileBase;
 
 	/** Used to spawn the grid to manager's location */
-	UFUNCTION(CallInEditor, Category = "Grid spawner")
+	UFUNCTION(CallInEditor, BlueprintCallable, Category = "Grid spawner")
 		void SpawnGrid();
 
 	/** Calculates grid tile location for spawning the grid */

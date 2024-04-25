@@ -33,7 +33,7 @@ public:
 
 	/* Function to check the tiles inside the collision. Currently used in editor for testing. */
 	UFUNCTION(CallInEditor, Category = "Overlapping Tiles")
-		void CheckCollision();
+		void CheckOverlapTiles();
 
 	/* Check if given vector is inside of this actor's box collision. */
 	bool TileIsInsideXY(const FVector& In) const;
