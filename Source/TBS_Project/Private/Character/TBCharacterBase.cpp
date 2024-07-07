@@ -27,3 +27,8 @@ void ATBCharacterBase::BeginPlay()
 	}
 }
 
+class UAbilitySystemComponent* ATBCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+
+}

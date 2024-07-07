@@ -26,6 +26,13 @@ class TBS_PROJECT_API ATBCharacterBase : public ACharacter, public IAbilitySyste
 public:
 	ATBCharacterBase();
 
+	//~ Begin IAbilitySystemInterface
+
+	UFUNCTION(BlueprintCallable, Category = "Game State Change Functions")
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	//~ End IAbilitySystemInterface
+
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
 		class ATileBase* CurrentTile;
@@ -36,11 +43,6 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
 		class UAbilitySystemComponent* AbilitySystemComponent;
 
-	/** Returns our Ability System Component.  */
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override
-	{
-		return AbilitySystemComponent;
-	}
 
 protected:
 
