@@ -18,16 +18,17 @@ UTBAbilityHandlerComponent::UTBAbilityHandlerComponent()
 	//Ref of the speed of the ability to use the countdown for the combat system to countdown
 }
 
-void UTBAbilityHandlerComponent::SetNewAbility(UGameplayAbilityBase* Ability)
+bool UTBAbilityHandlerComponent::SetNewAbility(TSubclassOf<UTBGameplayAbilityBase> Ability)
 {
 	CurrentAbility = Ability;
 
 	/* Bind new set ability into the delegate that progress ability. */
 	GameState->ProgressCombatAbilitiesDelegate.AddUObject(this,&UTBAbilityHandlerComponent::ProgressAbilityState);
+
+	return true;
 }
 
 void UTBAbilityHandlerComponent::ProgressAbilityState()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Bound function called on: %s"), *this->GetName());
 }
-

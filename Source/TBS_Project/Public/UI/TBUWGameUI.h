@@ -9,9 +9,10 @@
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FTBAbilityOnClickedSignature, class UTBUWGameUI*, Button);
 /**
- * 
+ * This was made to test C++ and BP connection in UI not sure if going to continue
  */
 UCLASS()
+
 class TBS_PROJECT_API UTBUWGameUI : public UUserWidget
 {
 	GENERATED_BODY()

@@ -35,13 +35,13 @@ public:
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
-		class ATileBase* CurrentTile;
+	TObjectPtr<ATileBase> CurrentTile;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
-		class UTBAbilityHandlerComponent* AbilityHandlerComponent;
+	TObjectPtr<UTBAbilityHandlerComponent> AbilityHandlerComponent;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-		class UAbilitySystemComponent* AbilitySystemComponent;
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 
 protected:

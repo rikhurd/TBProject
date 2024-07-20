@@ -2,6 +2,8 @@
 
 
 #include "Player/TBPlayerController.h"
+#include "Character/TBCharacterBase.h"
+
 
 //////////////////////////////////////////////////////////////////////////
 // Input
@@ -64,3 +66,14 @@ void ATBPlayerController::Look(const FInputActionValue& Value)
 }
 
 */
+
+bool ATBPlayerController::AddPartyCharacter(TObjectPtr<ATBCharacterBase> NewCharacter)
+{
+	check(NewCharacter);
+
+	//PlayerPartyArray.
+
+	PlayerPartyArray.AddUnique(NewCharacter);
+
+	return false;
+}

@@ -9,10 +9,24 @@
 /**
  * 
  */
+
+class ATBCharacterBase;
+
 UCLASS()
 class TBS_PROJECT_API ATBPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	bool AddPartyCharacter(TObjectPtr<ATBCharacterBase> NewCharacter);
+
+	//~ End IAbilitySystemInterface
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, Category = "Player")
+	TArray<TObjectPtr<ATBCharacterBase>> PlayerPartyArray;
 
 protected:
 

@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class TBS_PROJECT_API UGameplayAbilityBase : public UGameplayAbility
+class TBS_PROJECT_API UTBGameplayAbilityBase : public UGameplayAbility
 {
 	GENERATED_BODY()
 	

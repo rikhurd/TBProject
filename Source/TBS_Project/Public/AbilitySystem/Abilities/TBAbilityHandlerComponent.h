@@ -8,7 +8,7 @@
 #include "TBAbilityHandlerComponent.generated.h"
 
 class ATBGameState;
-class UGameplayAbilityBase;
+class UTBGameplayAbilityBase;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TBS_PROJECT_API UTBAbilityHandlerComponent : public UActorComponent
@@ -21,15 +21,15 @@ public:
 
 	/* Current ability to be handled */
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
-		class UGameplayAbilityBase* CurrentAbility;
+	TSubclassOf<UTBGameplayAbilityBase> CurrentAbility;
 
 	/** Set given ability to be used  */
 	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
-		void SetNewAbility(UGameplayAbilityBase* Ability);
+	bool SetNewAbility(TSubclassOf<UTBGameplayAbilityBase> Ability);
 
 	/** Progress ability's state.  */
 	UFUNCTION(Category = "Ability Handler")
-		void ProgressAbilityState();
+	void ProgressAbilityState();
 
 	/*
 protected:
