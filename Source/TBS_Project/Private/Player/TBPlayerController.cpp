@@ -67,13 +67,15 @@ void ATBPlayerController::Look(const FInputActionValue& Value)
 
 */
 
-bool ATBPlayerController::AddPartyCharacter(TObjectPtr<ATBCharacterBase> NewCharacter)
+bool ATBPlayerController::AddPartyCharacter(ATBCharacterBase* NewCharacter)
 {
-	check(NewCharacter);
+	if (!NewCharacter) {
+		return false;
+	}
 
 	//PlayerPartyArray.
 
 	PlayerPartyArray.AddUnique(NewCharacter);
 
-	return false;
+	return true;
 }

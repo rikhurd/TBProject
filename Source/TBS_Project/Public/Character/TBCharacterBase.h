@@ -28,10 +28,13 @@ public:
 
 	//~ Begin IAbilitySystemInterface
 
-	UFUNCTION(BlueprintCallable, Category = "Game State Change Functions")
+	UFUNCTION(BlueprintCallable, Category = "Ability System")
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	//~ End IAbilitySystemInterface
+
+	UFUNCTION(Blueprintable, Category = "Ability Handler")
+	class UTBAbilityHandlerComponent* GetAbilityHandlerComponent() const;
 
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")

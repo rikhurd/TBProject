@@ -14,4 +14,9 @@ class TBS_PROJECT_API UTBGameplayAbilityBase : public UGameplayAbility
 {
 	GENERATED_BODY()
 	
+public:
+
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	 bool AbilitySetup();
+	 bool AbilitySetup_Implementation();
 };

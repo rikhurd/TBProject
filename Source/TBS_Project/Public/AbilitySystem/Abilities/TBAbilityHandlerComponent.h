@@ -10,6 +10,7 @@
 class ATBGameState;
 class UTBGameplayAbilityBase;
 
+/* UTBAbilityHandlerComponent is meant to be used to set new abilities and progress them in combat for all actors that are meant to be used in combat  */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TBS_PROJECT_API UTBAbilityHandlerComponent : public UActorComponent
 {

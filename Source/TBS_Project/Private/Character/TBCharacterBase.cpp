@@ -36,3 +36,8 @@ class UAbilitySystemComponent* ATBCharacterBase::GetAbilitySystemComponent() con
 	return AbilitySystemComponent;
 
 }
+
+class UTBAbilityHandlerComponent* ATBCharacterBase::GetAbilityHandlerComponent() const
+{
+	return AbilityHandlerComponent;
+}

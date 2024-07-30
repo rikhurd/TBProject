@@ -20,7 +20,7 @@ class TBS_PROJECT_API ATBPlayerController : public APlayerController
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Player")
-	bool AddPartyCharacter(TObjectPtr<ATBCharacterBase> NewCharacter);
+	bool AddPartyCharacter(ATBCharacterBase* NewCharacter);
 
 	//~ End IAbilitySystemInterface
 

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "AbilitySystem/Abilities/TBGameplayAbilityBase.h"
+#include "GameplayAbilitySpec.h" 
 
 #include "TBAbilityDataAsset.generated.h"
 
@@ -12,26 +12,22 @@
 /**
  * 
  */
-
-USTRUCT()
-struct FAbilityInfo {
-	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere)
-	FString AssetName;
-
-	UPROPERTY(EditAnywhere)
-	TObjectPtr<UTexture2D> AssetThumbnail;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<UTBGameplayAbilityBase> AssetAbility;
-};
-
-UCLASS()
+UCLASS(BlueprintType)
 class TBS_PROJECT_API UTBAbilityDataAsset : public UDataAsset
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere)
-	TArray<FAbilityInfo> AssetItems;
+public:
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FName AbilityName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UTexture2D> AbilityThumbnail;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSoftClassPtr<UGameplayAbility> AbilityClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FString AbilityDescription;
 };
