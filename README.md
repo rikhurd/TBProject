@@ -6,18 +6,4 @@ Hobby project for a turn based roleplaying game
 
 This project is mostly for experimenting with new type of turn based game design and challenging myself with gameplay programming.
 
-Basics of grid based movement is done.
-
-Keyboard shortcuts:
-
-WASD - Movement while not in a grid
-F - Interact (teleport while in the right spot)
-QE - Move camera
-
-On the grid click character to enable pathfinding.
-Left click - Move to the tile if path is found
-
-Hold left shift and move cursor on the grid paints unwalkable walls on the grid.
-Tap right click to cancel pathfinding.
-
-UPDATE: Working on adding Gameplay Ability System integration and basic combat abilities. Progress at the moment is slow while I also read upon Game Engine Architecture in general.
+Basics of grid based movement is done. Currently doing Gameplay Ability System Implementation and Common UI implementation.
