@@ -8,3 +8,8 @@ bool UTBGameplayAbilityBase::AbilitySetup_Implementation()
 	UE_LOG(LogTemp, Warning, TEXT("NO ABILITY OVERRIDE DONE"));
 	return false;
 }
+
+void UTBGameplayAbilityBase::AbilityTargetTile_Implementation(AActor* SelectedTarget)
+{
+	UE_LOG(LogTemp, Warning, TEXT("NO ABILITY TARGET IMPLEMENTED"));
+}

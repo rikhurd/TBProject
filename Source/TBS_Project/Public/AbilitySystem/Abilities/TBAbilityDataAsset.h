@@ -8,6 +8,14 @@
 
 #include "TBAbilityDataAsset.generated.h"
 
+UENUM(BlueprintType)
+enum class EAbilityTargetSelectType : uint8
+{
+	Any,
+	Line,
+	Cone,
+	Character
+};
 
 /**
  * 
@@ -30,4 +38,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FString AbilityDescription;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	EAbilityTargetSelectType AbilityTargetSelectType;
 };

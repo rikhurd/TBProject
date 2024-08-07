@@ -4,6 +4,7 @@
 #include "GameModes/TBGameState.h"
 #include "GameFramework/PlayerState.h"
 
+
 /* Calls setup function with the given enum choice */
 void ATBGameState::SetGameStateMode_Implementation(EGameStateMode GameMode)
 {

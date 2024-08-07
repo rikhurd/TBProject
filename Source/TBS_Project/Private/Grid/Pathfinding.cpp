@@ -3,6 +3,7 @@
 
 #include "Grid/Pathfinding.h"
 #include "Grid/TileBase.h"
+#include "Player/TBPlayerController.h"
 
 /* Sets default values
 UPathfinding::UPathfinding()
@@ -12,10 +13,10 @@ UPathfinding::UPathfinding()
 
 TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targetNode)
 {
-	TArray<ATileBase*> toSearch;
+	TArray<TObjectPtr<ATileBase>> toSearch;
 	toSearch.Add(startNode);
 
-	TArray<ATileBase*> processed;
+	TArray<TObjectPtr<ATileBase>> processed;
 
 	while (!toSearch.IsEmpty())
 	{
@@ -29,7 +30,7 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 		Could be replaced with a Heap
 
 		*/
-		ATileBase* current = toSearch[0];
+		TObjectPtr<ATileBase> current = toSearch[0];
 		for (ATileBase* node : toSearch)
 		{
 			if (node->F < current->F || node->F == current->F && node->H < current->H)
@@ -42,8 +43,8 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 
 		if (current == targetNode)
 		{
-			ATileBase* currentPathTile = targetNode;
-			TArray<ATileBase*> path;
+			TObjectPtr<ATileBase> currentPathTile = targetNode;
+			TArray<TObjectPtr<ATileBase>> path;
 			int count = 100;
 			while (currentPathTile != startNode)
 			{
@@ -83,3 +84,11 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 	return TArray<ATileBase*>();
 }
 
+
+// Set boolean to controller so controller changes to a state where u can select a tile. ALSO maybe add ability handler as a parameter. DO U NEED WHOLE PATH IN THE ABILITY? OR SAVE IT IN CONTROLLER
+void UPathfinding::GetSelectedTile(APlayerController* PlayerController)
+{
+	if (ATBPlayerController* MyPlayerController = Cast<ATBPlayerController>(PlayerController)) {
+		MyPlayerController->SelectTileForAbility = true;
+	}
+}

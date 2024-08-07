@@ -8,6 +8,7 @@
 
 //Forward declaration
 class ATileBase;
+class ATBPlayerController;
 
 UCLASS()
 class TBS_PROJECT_API UPathfinding : public UBlueprintFunctionLibrary
@@ -20,4 +21,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Find Path function")
 	static TArray<ATileBase*> FindPath(ATileBase* startNode, ATileBase* targetNode);
+
+	UFUNCTION(BlueprintCallable, Category = "Get Tile function")
+	static void GetSelectedTile(APlayerController* PlayerController);
 };

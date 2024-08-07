@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "AbilitySystem/TBAbilityInterface.h"
 #include "TBPlayerController.generated.h"
 
 /**
@@ -11,9 +12,12 @@
  */
 
 class ATBCharacterBase;
+class UInputMappingContext;
+class UEnhancedInputLocalPlayerSubsystem;
+
 
 UCLASS()
-class TBS_PROJECT_API ATBPlayerController : public APlayerController
+class TBS_PROJECT_API ATBPlayerController : public APlayerController, public ITBAbilityInterface
 {
 	GENERATED_BODY()
 
@@ -24,9 +28,13 @@ public:
 
 	//~ End IAbilitySystemInterface
 
-	/** Please add a variable description */
+	/** Contains party members */
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
 	TArray<TObjectPtr<ATBCharacterBase>> PlayerPartyArray;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, Category = "Tile select")
+	bool SelectTileForAbility = false;
 
 protected:
 
