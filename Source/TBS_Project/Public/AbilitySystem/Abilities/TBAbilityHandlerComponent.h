@@ -22,11 +22,11 @@ public:
 
 	/* Current ability to be handled */
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
-	TSubclassOf<UTBGameplayAbilityBase> CurrentAbility;
+	TObjectPtr<UTBGameplayAbilityBase> CurrentAbility;
 
 	/** Set given ability to be used  */
 	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
-	bool SetNewAbility(TSubclassOf<UTBGameplayAbilityBase> Ability);
+	bool SetNewAbility(UTBGameplayAbilityBase* Ability);
 
 	/** Progress ability's state.  */
 	UFUNCTION(Category = "Ability Handler")

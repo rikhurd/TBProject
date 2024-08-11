@@ -3,7 +3,7 @@
 
 #include "AbilitySystem/Abilities/TBGameplayAbilityBase.h"
 
-bool UTBGameplayAbilityBase::AbilitySetup_Implementation()
+bool UTBGameplayAbilityBase::AbilitySetup_Implementation(AActor* SelectedTarget)
 {
 	UE_LOG(LogTemp, Warning, TEXT("NO ABILITY OVERRIDE DONE"));
 	return false;
@@ -11,5 +11,8 @@ bool UTBGameplayAbilityBase::AbilitySetup_Implementation()
 
 void UTBGameplayAbilityBase::AbilityTargetTile_Implementation(AActor* SelectedTarget)
 {
+	//UE_LOG(LogTemp, Warning, TEXT("NO ABILITY TARGET IMPLEMENTED"));
+	if (AbilitySetup(SelectedTarget))
 	UE_LOG(LogTemp, Warning, TEXT("NO ABILITY TARGET IMPLEMENTED"));
+	// Get abilitys owner and set in their Handler Component the new ability.
 }

@@ -18,7 +18,7 @@ UTBAbilityHandlerComponent::UTBAbilityHandlerComponent()
 	//Ref of the speed of the ability to use the countdown for the combat system to countdown
 }
 
-bool UTBAbilityHandlerComponent::SetNewAbility(TSubclassOf<UTBGameplayAbilityBase> Ability)
+bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* Ability)
 {
 	CurrentAbility = Ability;
 

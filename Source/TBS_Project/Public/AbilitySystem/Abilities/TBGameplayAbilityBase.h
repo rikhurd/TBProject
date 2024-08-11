@@ -18,8 +18,8 @@ class TBS_PROJECT_API UTBGameplayAbilityBase : public UGameplayAbility, public I
 public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	 bool AbilitySetup();
-	 bool AbilitySetup_Implementation();
+	 bool AbilitySetup(AActor* SelectedTarget);
+	 bool AbilitySetup_Implementation(AActor* SelectedTarget);
 
 	 void AbilityTargetTile_Implementation(AActor* SelectedTarget) override;
 };
