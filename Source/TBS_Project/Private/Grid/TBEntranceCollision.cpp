@@ -88,7 +88,7 @@ void ATBEntranceCollision::OnOverlapBegin(class UPrimitiveComponent* OverlappedC
 
 		UE_LOG(LogTemp, Warning, TEXT("Actor overlapped entrance collision: %s"), *OtherActor->GetName());
 
-		if (EntranceTiles.IsValidIndex(0))
+		if (!EntranceTiles.IsEmpty())
 		{
 
 			/* Execute Set Game State mode to call a delegate that fires off other calls that are needed for changing Game Sate Mode */
@@ -110,7 +110,7 @@ void ATBEntranceCollision::OnOverlapBegin(class UPrimitiveComponent* OverlappedC
 																EntranceTiles[0]->GetActorLocation().Y,
 																CastedCharacter->GetActorLocation().Z));
 
-			//CastedCharacter->UpdateCharacterTile(EntranceTiles[0]);
+			CastedCharacter->SetCurrentTile(EntranceTiles[0]);
 		}
 
 	}

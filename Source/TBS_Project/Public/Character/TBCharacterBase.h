@@ -36,16 +36,19 @@ public:
 	UFUNCTION(Blueprintable, Category = "Ability Handler")
 	class UTBAbilityHandlerComponent* GetAbilityHandlerComponent() const;
 
-	/** Please add a variable description */
-	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly, Category = "Default")
-	TObjectPtr<ATileBase> CurrentTile;
-
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
 	TObjectPtr<UTBAbilityHandlerComponent> AbilityHandlerComponent;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
+	//~ These two overttide Blueprint Get and Set
+
+	UFUNCTION(BlueprintGetter)
+	ATileBase* GetCurrentTile() const { return CurrentTile; }
+
+	UFUNCTION(BlueprintSetter)
+	void SetCurrentTile(ATileBase* NewTile) { CurrentTile = NewTile; };
 
 protected:
 
@@ -58,5 +61,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+private:
 
+	/** Current Tile this character is on */
+	UPROPERTY(EditDefaultsOnly, BlueprintGetter = GetCurrentTile, BlueprintSetter = SetCurrentTile)
+	TObjectPtr<ATileBase> CurrentTile;
 };

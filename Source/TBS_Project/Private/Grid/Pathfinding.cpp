@@ -13,10 +13,14 @@ UPathfinding::UPathfinding()
 
 TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targetNode)
 {
-	TArray<TObjectPtr<ATileBase>> toSearch;
-	toSearch.Add(startNode);
+	if (!IsValid(startNode) || !IsValid(targetNode)) {
+		UE_LOG(LogTemp, Warning, TEXT("Pathfinding called while no tiles set. startNode: %s targetNode: %s"), startNode, targetNode);
+		return TArray<ATileBase*>();
+	}
 
-	TArray<TObjectPtr<ATileBase>> processed;
+	TArray<ATileBase*> toSearch;
+	toSearch.Add(startNode);
+	TArray<ATileBase*> processed;
 
 	while (!toSearch.IsEmpty())
 	{
@@ -30,7 +34,7 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 		Could be replaced with a Heap
 
 		*/
-		TObjectPtr<ATileBase> current = toSearch[0];
+		ATileBase* current = toSearch[0];
 		for (ATileBase* node : toSearch)
 		{
 			if (node->F < current->F || node->F == current->F && node->H < current->H)
@@ -43,8 +47,8 @@ TArray<ATileBase*> UPathfinding::FindPath(ATileBase* startNode, ATileBase* targe
 
 		if (current == targetNode)
 		{
-			TObjectPtr<ATileBase> currentPathTile = targetNode;
-			TArray<TObjectPtr<ATileBase>> path;
+			ATileBase* currentPathTile = targetNode;
+			TArray<ATileBase*> path;
 			int count = 100;
 			while (currentPathTile != startNode)
 			{
