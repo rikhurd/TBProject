@@ -11,18 +11,17 @@ UTBAbilityHandlerComponent::UTBAbilityHandlerComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
-	GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
-	// Add ref of an ability here that is going to be used by the character
-
-	//Ref of the speed of the ability to use the countdown for the combat system to countdown
 }
 
 bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* Ability)
 {
+	if (!IsValid(GameState)) GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
+
+	check(GameState);
+
 	CurrentAbility = Ability;
 
-	//THIS COULDNT BIND IT FOR SOME REASON 17.8
+	//GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this);
 
 	/* Bind new set ability into the delegate that progress ability. */
 	GameState->ProgressCombatAbilitiesDelegate.AddUObject(this,&UTBAbilityHandlerComponent::ProgressAbilityState);
