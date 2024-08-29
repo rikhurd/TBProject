@@ -15,21 +15,21 @@ UTBAbilityHandlerComponent::UTBAbilityHandlerComponent()
 
 bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* Ability)
 {
-	if (!IsValid(GameState)) GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
+	if (!GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this)) {
+		if (!IsValid(GameState)) GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
 
-	check(GameState);
+		check(GameState);
 
-	CurrentAbility = Ability;
+		CurrentAbility = Ability;
+		/* Bind new set ability into the delegate that progress ability. */
+		GameState->ProgressCombatAbilitiesDelegate.AddUObject(this, &UTBAbilityHandlerComponent::ProgressAbilityState);
+	}
 
-	//GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this);
-
-	/* Bind new set ability into the delegate that progress ability. */
-	GameState->ProgressCombatAbilitiesDelegate.AddUObject(this,&UTBAbilityHandlerComponent::ProgressAbilityState);
 
 	return true;
 }
 
 void UTBAbilityHandlerComponent::ProgressAbilityState()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Bound function called on: %s"), *this->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("Bound function called on: %s with Ability %s2"), *this->GetName(), *CurrentAbility->GetName());
 }
