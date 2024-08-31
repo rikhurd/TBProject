@@ -26,6 +26,11 @@ public:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Pathfinding Variables")
 		FIntPoint Index;
 
+	// Need to get actor location before we attach it into the Grid which makes the tile location be relative to the GridManager's position in the world.
+	/** TileBase World Location */
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Pathfinding Variables")
+		FVector WorldLocation;
+
 	/** Distance from the tile to the start tile */
 	UPROPERTY(BlueprintReadOnly, Category = "Pathfinding Variables")
 		double G;

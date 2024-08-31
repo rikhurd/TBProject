@@ -39,12 +39,13 @@ void AGridManager::SpawnGrid()
 			{
 				FIntPoint IndexPos = FIntPoint(IndexX, IndexY);
 				SpawnedTile->Index = IndexPos;
+				// Need to get actor location before we attach it into the Grid which makes the tile location be relative to the GridManager's position in the world.
+				SpawnedTile->WorldLocation = SpawnedTile->GetActorLocation() + GetActorLocation();
 				
 				UGameplayStatics::FinishSpawningActor(SpawnedTile, FTransform(GridTileLocation));
 
 				// Attach tile actor to the grid for group movement and deleting when spawning new grid.
-				SpawnedTile->AttachToActor(this,FAttachmentTransformRules
-					(EAttachmentRule::KeepRelative,EAttachmentRule::KeepRelative, EAttachmentRule::KeepRelative,false));
+				SpawnedTile->AttachToActor(this,FAttachmentTransformRules::KeepRelativeTransform);
 
 				TileBaseMap.Add(IndexPos,SpawnedTile);
 			}
