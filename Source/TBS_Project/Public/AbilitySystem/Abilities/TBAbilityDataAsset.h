@@ -12,9 +12,10 @@ UENUM(BlueprintType)
 enum class EAbilityTargetSelectType : uint8
 {
 	Any,
+	Sequence,
 	Line,
 	Cone,
-	Character
+	Character,
 };
 
 /**

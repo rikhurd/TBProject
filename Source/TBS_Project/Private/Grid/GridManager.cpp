@@ -27,11 +27,16 @@ void AGridManager::SpawnGrid()
 	
 	/* Remove old attached actors in this Grid Manager */
 	for (AActor* AttachedTileActor : AttachedActors)
+	{
 		if (AttachedTileActor->IsA(ATileBase::StaticClass()))
+		{
 			AttachedTileActor->Destroy();
+		}
+	}
 
 	/* Spawns the grid and calculates needed positions */
 	for (int IndexX = 0; IndexX != GridTileCount.X; ++IndexX)
+	{
 		for (int IndexY = 0; IndexY != GridTileCount.Y; ++IndexY)
 		{
 			GridTileLocation = CalculateGridTileLocation(IndexX, IndexY);	
@@ -50,10 +55,14 @@ void AGridManager::SpawnGrid()
 				TileBaseMap.Add(IndexPos,SpawnedTile);
 			}
 		}
+	}
+
 
 	//Sets tile neighbors based on intpoint values
 	for (auto& tile : TileBaseMap)
+	{
 		tile.Value->SetNeighbors(this);
+	}
 }
 
 FVector AGridManager::CalculateGridTileLocation(float IndexX, float IndexY)

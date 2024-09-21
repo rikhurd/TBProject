@@ -25,7 +25,7 @@ class TBS_PROJECT_API ITBAbilityInterface
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
-	// Sets Game State Mode mainly used in TBGameState to switch between Combat and Exploration mode
+	/* Blueprint native event that gets targets for the ability */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Ability Tile Select Functions")
-	void AbilityTargetTile(AActor* SelectedTarget);
+	void AbilityTargetTile(TArray<AActor*>& SelectedTargets);
 };

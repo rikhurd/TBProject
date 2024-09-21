@@ -23,10 +23,9 @@ class TBS_PROJECT_API ATBPlayerController : public APlayerController, public ITB
 
 public:
 
+	/** Adding new party members */
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	bool AddPartyCharacter(ATBCharacterBase* NewCharacter);
-
-	//~ End IAbilitySystemInterface
 
 	/** Contains party members */
 	UPROPERTY(BlueprintReadWrite, Category = "Player")
@@ -35,14 +34,6 @@ public:
 	/** Please add a variable description */
 	UPROPERTY(BlueprintReadWrite, Category = "Tile select")
 	bool SelectTileForAbility = false;
-
-protected:
-
-	/** Called for movement input
-	void Move(const FInputActionValue& Value);
-
-	/** Called for looking input 
-	void Look(const FInputActionValue& Value);*/
 
 };
 

@@ -26,9 +26,11 @@ void ATBGameState::SetupCombatMode()
 {
 	/* Iterates whole player list which size is 1 because of only singleplayer is implemented
 		- Later could be fetch from game's start menu when playing singleplayer -> PlayerState is set as a variable*/
-	for (APlayerState* PlayerState : PlayerArray){
+	for (APlayerState* PlayerState : PlayerArray)
+	{
 		/* Checks if interface is implemented */
-		if (PlayerState->Implements<UTBGameStateChangeInterface>()){
+		if (PlayerState->Implements<UTBGameStateChangeInterface>())
+		{
 			/* Sends call on the player state */
 			ITBGameStateChangeInterface::Execute_CombatModeInit(PlayerState);
 		}

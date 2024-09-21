@@ -15,17 +15,20 @@ UTBAbilityHandlerComponent::UTBAbilityHandlerComponent()
 
 bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* Ability)
 {
-	if (!GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this)) {
-		if (!IsValid(GameState)) GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
+	if (!IsValid(GameState))
+	{
+		GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
+	}
+	check(GameState);
 
-		check(GameState);
-
+	if (!GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this))
+	{
 		CurrentAbility = Ability;
 		/* Bind new set ability into the delegate that progress ability. */
 		GameState->ProgressCombatAbilitiesDelegate.AddUObject(this, &UTBAbilityHandlerComponent::ProgressAbilityState);
 	}
 
-
+	// Bool can later be used to check for confirmation on overwriting current abilities
 	return true;
 }
 
