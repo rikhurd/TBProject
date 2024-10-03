@@ -33,27 +33,27 @@ public:
 
 	//~ End IAbilitySystemInterface
 
-	UFUNCTION(Blueprintable, Category = "Ability Handler")
-	class UTBAbilityHandlerComponent* GetAbilityHandlerComponent() const;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
 	TObjectPtr<UTBAbilityHandlerComponent> AbilityHandlerComponent;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
-
 	//~ These two overttide Blueprint Get and Set
 
 	UFUNCTION(BlueprintGetter)
-	ATileBase* GetCurrentTile() const { return CurrentTile; }
+	ATileBase* GetCurrentTile() const
+	{
+		return CurrentTile;
+	};
 
 	UFUNCTION(BlueprintSetter)
-	void SetCurrentTile(ATileBase* NewTile) { CurrentTile = NewTile; };
+	void SetCurrentTile(ATileBase* NewTile)
+	{
+		CurrentTile = NewTile;
+	};
 
 protected:
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-		class UActorTileAnchor* TileAnchor;
 
 	//UPROPERTY()
 		const class UCharacterAttributeSet* AttributeSet;

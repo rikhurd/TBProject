@@ -10,20 +10,22 @@ bool UTBGameplayAbilityBase::AbilitySetup_Implementation(AActor* SelectedTarget)
 	return false;
 }
 
-void UTBGameplayAbilityBase::AbilityTargetTile_Implementation(TArray<AActor*>& SelectedTargets)
+void UTBGameplayAbilityBase::AbilityTargetTile_Implementation(const TArray<AActor*>& SelectedTargets)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("NO ABILITY TARGET IMPLEMENTED"));
-	//if (AbilitySetup(SelectedTarget))
 	
-		// Get abilitys owner and set in their Handler Component the new ability.
-		if (GetOwningActorFromActorInfo()->FindComponentByClass<UTBAbilityHandlerComponent>())
-		{
-			TObjectPtr<UTBAbilityHandlerComponent> CharacterAbilityHandler = GetOwningActorFromActorInfo()->GetComponentByClass<UTBAbilityHandlerComponent>();
+	// Get abilitys owner and set in their Handler Component the new ability.
+	if (GetOwningActorFromActorInfo()->FindComponentByClass<UTBAbilityHandlerComponent>())
+	{
+		TObjectPtr<UTBAbilityHandlerComponent> CharacterAbilityHandler = GetOwningActorFromActorInfo()->GetComponentByClass<UTBAbilityHandlerComponent>();
 
-			if (IsValid(CharacterAbilityHandler))
-			{
-				CharacterAbilityHandler->SetNewAbility(this);
-			}
+		if (IsValid(CharacterAbilityHandler))
+		{
+			AbilityTargets = SelectedTargets;
+			UE_LOG(LogTemp, Warning, TEXT("AbilityHandler: %s"), *CharacterAbilityHandler->GetName());
+
+			CharacterAbilityHandler->SetNewAbility(this);
 		}
+	}
 	
 }

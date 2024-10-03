@@ -13,12 +13,6 @@ ATBCharacterBase::ATBCharacterBase()
 	AbilityHandlerComponent = CreateDefaultSubobject<UTBAbilityHandlerComponent>(TEXT("Ability Handler Component"));
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("Ability System Component"));
 
-	TileAnchor = CreateDefaultSubobject<UActorTileAnchor>(TEXT("TileAnchor"));
-
-	//Try GiveABility and get handle from it
-	//FGameplayAbilitySpec AbilitySpec(AbilityCDO, AbilityToGrant.AbilityLevel);
-
-	//AbilitySystemComponent->GiveAbility(AbilitySpec);
 }
 
 void ATBCharacterBase::BeginPlay()
@@ -34,10 +28,4 @@ void ATBCharacterBase::BeginPlay()
 class UAbilitySystemComponent* ATBCharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
-
-}
-
-class UTBAbilityHandlerComponent* ATBCharacterBase::GetAbilityHandlerComponent() const
-{
-	return AbilityHandlerComponent;
 }

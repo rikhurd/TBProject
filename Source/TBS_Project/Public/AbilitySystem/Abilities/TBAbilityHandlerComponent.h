@@ -11,7 +11,7 @@ class ATBGameState;
 class UTBGameplayAbilityBase;
 
 /* UTBAbilityHandlerComponent is meant to be used to set new abilities and progress them in combat for all actors that are meant to be used in combat  */
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class TBS_PROJECT_API UTBAbilityHandlerComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -32,15 +32,6 @@ public:
 	UFUNCTION(Category = "Ability Handler")
 	void ProgressAbilityState();
 
-	/*
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	*/
 private:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Ability Handler")
 		class ATBGameState* GameState;

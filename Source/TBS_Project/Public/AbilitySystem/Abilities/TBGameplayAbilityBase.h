@@ -24,5 +24,5 @@ public:
 	 bool AbilitySetup(AActor* SelectedTarget);
 	 bool AbilitySetup_Implementation(AActor* SelectedTarget);
 
-	 void AbilityTargetTile_Implementation(TArray<AActor*>& SelectedTargets) override;
+	 void AbilityTargetTile_Implementation(const TArray<AActor*>& SelectedTargets) override;
 };
