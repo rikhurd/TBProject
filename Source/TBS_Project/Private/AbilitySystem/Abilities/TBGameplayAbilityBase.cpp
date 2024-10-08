@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/Abilities/TBGameplayAbilityBase.h"
 #include "AbilitySystem/Abilities/TBAbilityHandlerComponent.h"
+#include "AbilitySystem/Abilities/TBAbilityDataAsset.h"
 
 bool UTBGameplayAbilityBase::AbilitySetup_Implementation(AActor* SelectedTarget)
 {
@@ -27,5 +28,9 @@ void UTBGameplayAbilityBase::AbilityTargetTile_Implementation(const TArray<AActo
 			CharacterAbilityHandler->SetNewAbility(this);
 		}
 	}
-	
+}
+
+bool UTBGameplayAbilityBase::ActivateAbility()
+{
+	return false;
 }

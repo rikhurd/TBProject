@@ -7,6 +7,7 @@
 #include "AbilitySystem/TBAbilityInterface.h"
 #include "TBGameplayAbilityBase.generated.h"
 
+class UTBAbilityDataAsset;
 /**
  * 
  */
@@ -20,9 +21,16 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Ability Target")
 	TArray<AActor*> AbilityTargets;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ability Data")
+	TObjectPtr<UTBAbilityDataAsset> AbilityData;
+	
+
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	 bool AbilitySetup(AActor* SelectedTarget);
 	 bool AbilitySetup_Implementation(AActor* SelectedTarget);
 
 	 void AbilityTargetTile_Implementation(const TArray<AActor*>& SelectedTargets) override;
+
+	 UFUNCTION(BlueprintCallable)
+	 bool ActivateAbility();
 };

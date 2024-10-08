@@ -18,6 +18,23 @@ enum class EAbilityTargetSelectType : uint8
 	Character,
 };
 
+UCLASS(EditInlineNew, DefaultToInstanced, CollapseCategories, DisplayName = "Movement Variable Data")
+class UAbilityVariableData : public UObject
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 ActionSpeed = 1;
+};
+
+UCLASS(DisplayName = "Attack Variable Data")
+class UAttackAbilityData : public UAbilityVariableData
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 ActionDamage = 5;
+};
 /**
  * 
  */
@@ -36,6 +53,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TSoftClassPtr<UGameplayAbility> AbilityClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly,Instanced)
+	class UAbilityVariableData* AbilityVariableData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FString AbilityDescription;
