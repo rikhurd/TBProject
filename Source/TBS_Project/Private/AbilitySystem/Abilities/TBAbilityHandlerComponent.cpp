@@ -28,7 +28,7 @@ bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* NewAbilit
 	if (!GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this))
 	{
 		CurrentAbility = NewAbility;
-		// CurrentAbilitySpeed = Ability->AbilityData->AbilityVariableData->ActionSpeed;
+		CurrentAbilitySpeed = CurrentAbility->AbilityData->AbilityVariableData->ActionSpeed;
 		/* Bind new set ability into the delegate that progress ability. */
 		GameState->ProgressCombatAbilitiesDelegate.AddUObject(this, &UTBAbilityHandlerComponent::ProgressAbilityState);
 	}
