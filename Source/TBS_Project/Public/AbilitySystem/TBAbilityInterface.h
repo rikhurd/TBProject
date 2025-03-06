@@ -27,5 +27,5 @@ public:
 
 	/* Blueprint native event that gets targets for the ability */
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Ability Tile Select Functions")
-	void AbilityTargetTile(const TArray<AActor*>& SelectedTargets);
+	void AbilityTargetTile(const TArray<AActor*>& SelectedTargets, FGameplayAbilitySpecHandle AbilityHandle);
 };

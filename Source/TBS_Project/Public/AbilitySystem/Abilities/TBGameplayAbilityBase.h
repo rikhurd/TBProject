@@ -29,8 +29,5 @@ public:
 	 bool AbilitySetup(AActor* SelectedTarget);
 	 bool AbilitySetup_Implementation(AActor* SelectedTarget);
 
-	 void AbilityTargetTile_Implementation(const TArray<AActor*>& SelectedTargets) override;
-
-	 UFUNCTION(BlueprintCallable)
-	 bool ActivateAbility();
+	 void AbilityTargetTile_Implementation(const TArray<AActor*>& SelectedTargets, FGameplayAbilitySpecHandle AbilityHandle) override;
 };

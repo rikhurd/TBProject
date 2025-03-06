@@ -12,8 +12,10 @@
 
 //Forward declaration
 class ATileBase;
-class UTBAbilityHandlerComponent;
-class UActorTileAnchor;
+class UTBAbilityAttributeSet;
+class ATBGameState;
+class UTBGameplayAbilityBase;
+class TBAbilityDataAsset;
 
 /**
  * 
@@ -36,9 +38,6 @@ public:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability System")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
-	TObjectPtr<UTBAbilityHandlerComponent> AbilityHandlerComponent;
-
 	//~ These two overttide Blueprint Get and Set
 
 	UFUNCTION(BlueprintGetter)
@@ -53,10 +52,40 @@ public:
 		CurrentTile = NewTile;
 	};
 
+	/* Current ability to be handled */
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
+	FGameplayAbilitySpecHandle CurrentAbilityHandle;
+
+	/* Current ability to be handled */
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Ability Handler")
+	int32 CurrentAbilitySpeed;
+
+	/** Set given ability to be used  */
+	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
+	bool SetNewAbility(UTBGameplayAbilityBase* NewAbility, FGameplayAbilitySpecHandle NewAbilityHandle);
+
+	/** Set given ability to be used  */
+	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
+	bool RemoveAbilityFromUse();
+
+	/** Progress ability's state.  */
+	UFUNCTION(Category = "Ability Handler")
+	void ProgressAbilityState();
+
+	/* Adds Ability Attribute set into the character's ability system component */
+	UFUNCTION(BlueprintCallable, Category = "Ability AttributeSet")
+	bool AddAbilityAttributeSet(UTBAbilityAttributeSet* NewAbilityAttributeSet);
+
+	/* Remove Ability Attribute set from the character's ability system component */
+	UFUNCTION(BlueprintCallable, Category = "Ability AttributeSet")
+	bool RemoveAbilityAttributeSet(UTBAbilityAttributeSet* OldAbilityAttributeSet);
+
 protected:
 
 	//UPROPERTY()
-		const class UCharacterAttributeSet* AttributeSet;
+		const class UTBCharacterAttributeSet* CharacterAttributeSet;
+
+		const class UTBAbilityAttributeSet* CurrentAbilityAttributeSet;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -66,4 +95,7 @@ private:
 	/** Current Tile this character is on */
 	UPROPERTY(EditDefaultsOnly, BlueprintGetter = GetCurrentTile, BlueprintSetter = SetCurrentTile)
 	TObjectPtr<ATileBase> CurrentTile;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Ability Handler")
+	class ATBGameState* GameState;
 };

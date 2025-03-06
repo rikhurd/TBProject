@@ -17,7 +17,36 @@ UTBAbilityHandlerComponent::UTBAbilityHandlerComponent()
 	CastedOwner = Cast<ATBCharacterBase>(GetOwner());
 }
 
-bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* NewAbility)
+bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* NewAbility, FGameplayAbilitySpecHandle NewAbilityHandle)
+{
+	if (!IsValid(GameState))
+	{
+		GameState = GetWorld() != NULL ? GetWorld()->GetGameState<ATBGameState>() : NULL;
+	}
+	check(GameState);
+	if (!GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this))
+	{
+		CurrentAbilityHandle = NewAbilityHandle;
+		/*
+		if (IsValid(Ability->AbilityData))
+		{
+		
+			CurrentAbilitySpeed = CurrentAbilityHandle->AbilityData->AbilityVariableData->ActionSpeed;
+			*/
+			/* Bind new set ability into the delegate that progress ability. */
+			CurrentAbilityDelegate = GameState->ProgressCombatAbilitiesDelegate.AddUObject(this, &UTBAbilityHandlerComponent::ProgressAbilityState);
+		/* }
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("Ability %s does not have Ability data set"), CurrentAbilityHandle);
+		}*/
+	}
+
+	// Bool can later be used to check for confirmation on overwriting current abilities
+	return true;
+}
+
+bool UTBAbilityHandlerComponent::RemoveAbilityFromUse()
 {
 	if (!IsValid(GameState))
 	{
@@ -25,28 +54,30 @@ bool UTBAbilityHandlerComponent::SetNewAbility(UTBGameplayAbilityBase* NewAbilit
 	}
 	check(GameState);
 
-	if (!GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this))
+	if (GameState->ProgressCombatAbilitiesDelegate.IsBoundToObject(this))
 	{
-		CurrentAbility = NewAbility;
-		CurrentAbilitySpeed = CurrentAbility->AbilityData->AbilityVariableData->ActionSpeed;
-		/* Bind new set ability into the delegate that progress ability. */
-		GameState->ProgressCombatAbilitiesDelegate.AddUObject(this, &UTBAbilityHandlerComponent::ProgressAbilityState);
+		/* Remove bind from delegate. */
+		GameState->ProgressCombatAbilitiesDelegate.Remove(CurrentAbilityDelegate);
 	}
 
 	// Bool can later be used to check for confirmation on overwriting current abilities
 	return true;
 }
 
+
 void UTBAbilityHandlerComponent::ProgressAbilityState()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Bound function called on: %s with Ability %s2"), *this->GetName(), *CurrentAbility->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("Bound function called on: %s with Ability %s2"), *this->GetName(), CurrentAbilityHandle);
 
+	CastedOwner->GetAbilitySystemComponent()->TryActivateAbility(CurrentAbilityHandle);
+
+	/*
 	if (CurrentAbilitySpeed >= 0)
 	{
-		CastedOwner->GetAbilitySystemComponent()->TryActivateAbility(CurrentAbility->GetCurrentAbilitySpecHandle());
+		CastedOwner->GetAbilitySystemComponent()->TryActivateAbility(CurrentAbilityHandle);
 	}
 	else
 	{
 		CurrentAbilitySpeed--;
-	}
+	}*/
 }

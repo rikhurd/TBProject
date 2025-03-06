@@ -19,7 +19,7 @@ enum class EAbilityTargetSelectType : uint8
 };
 
 UCLASS(EditInlineNew, DefaultToInstanced, CollapseCategories, DisplayName = "Movement Variable Data")
-class UAbilityVariableData : public UObject
+class UAbilityVariableBaseData : public UObject
 {
 	GENERATED_BODY()
 public:
@@ -28,7 +28,7 @@ public:
 };
 
 UCLASS(DisplayName = "Attack Variable Data")
-class UAttackAbilityData : public UAbilityVariableData
+class UAttackAbilityData : public UAbilityVariableBaseData
 {
 	GENERATED_BODY()
 public:
@@ -51,11 +51,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UTexture2D> AbilityThumbnail;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TSoftClassPtr<UGameplayAbility> AbilityClass;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly,Instanced)
-	class UAbilityVariableData* AbilityVariableData;
+	class UAbilityVariableBaseData* AbilityVariableData;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FString AbilityDescription;

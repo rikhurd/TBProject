@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-
 #include "TBAbilityHandlerComponent.generated.h"
 
 class ATBGameState;
@@ -24,7 +23,7 @@ public:
 
 	/* Current ability to be handled */
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Ability Handler")
-	TObjectPtr<UTBGameplayAbilityBase> CurrentAbility;
+	FGameplayAbilitySpecHandle CurrentAbilityHandle;
 
 	/* Current ability to be handled */
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Ability Handler")
@@ -32,7 +31,11 @@ public:
 
 	/** Set given ability to be used  */
 	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
-	bool SetNewAbility(UTBGameplayAbilityBase* NewAbility);
+	bool SetNewAbility(UTBGameplayAbilityBase* NewAbility, FGameplayAbilitySpecHandle NewAbilityHandle);
+
+	/** Set given ability to be used  */
+	UFUNCTION(BlueprintCallable, Category = "Ability Handler")
+	bool RemoveAbilityFromUse();
 
 	/** Progress ability's state.  */
 	UFUNCTION(Category = "Ability Handler")
@@ -40,8 +43,10 @@ public:
 
 private:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Ability Handler")
-		class ATBGameState* GameState;
+	class ATBGameState* GameState;
 
 	UPROPERTY(VisibleDefaultsOnly)
-		TObjectPtr<ATBCharacterBase> CastedOwner;
+	TObjectPtr<ATBCharacterBase> CastedOwner;
+
+	FDelegateHandle CurrentAbilityDelegate;
 };
